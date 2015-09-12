@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Food Search Engine</title>
+
+    <style>
+@charset "UTF-8";
+
+html, body{
+	padding:0;
+	margin:0;
+	position:relative;
+	background:url(/static/body.jpg);
+	background-repeat:repeat;
+	color:#fff;
+	letter-spacing:1px;
+	font-family:Georgia, "Times New Roman", Times, serif;
+}
+
+.zebra caption{
+	font-size:20px;
+	font-weight:normal;
+	background:url(/static/zebratable.png);
+	background-repeat:no-repeat;
+	background-position: 130px center;
+	padding-top: 20px;
+	height:50px;}
+
+#container{
+	padding-top:20px;
+	width:960px;
+	margin:0 auto;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+	width:100%;
+	-webkit-box-shadow:  0px 2px 1px 5px rgba(242, 242, 242, 0.1);
+    box-shadow:  0px 2px 1px 5px rgba(242, 242, 242, 0.1);
+}
+
+.zebra {
+    border: 1px solid #555;
+}
+
+.zebra td {
+    border-left: 1px solid #555;
+    border-top: 1px solid #555;
+    padding: 10px;
+    text-align: left;
+}
+
+.zebra th, .zebra th:hover {
+    border-left: 1px solid #555;
+	border-bottom: 1px solid #828282;
+    padding: 20px;
+    background-color:#151515 !important;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#151515), to(#404040)) !important;
+    background-image: -webkit-linear-gradient(top, #151515, #404040) !important;
+    background-image:    -moz-linear-gradient(top, #151515, #404040) !important;
+    background-image:     -ms-linear-gradient(top, #151515, #404040) !important;
+    background-image:      -o-linear-gradient(top, #151515, #404040) !important;
+    background-image:         linear-gradient(top, #151515, #404040) !important;
+	color:#fff !important;
+	font-weight:normal;
+}
+
+.zebra tbody tr:nth-child(even) {
+    background: #000 !important;
+	color:#fff;
+}
+
+.zebra tr:hover *{
+    background: #eeeeee;
+	color:#000;
+}
+
+.zebra tr {
+	background:#404040;
+	color:#fff;
+}
+
+
+
+</style>
+	<style>
+
+#search_form{float: left; display: inline; width: 485px;
+padding: 30px 20px 0 20px;}
+#search_form input{height: 37px; float: left;
+display: block; border: 0; width: 246px;
+padding: 5px 30px 3px 3px;
+background: url("/static/b.png") no-repeat top right;
+font: 23px bold "Myriad Pro", Myriad, Arial, Verdana, sans serif;
+color:#666666; font-style: italic}
+#search_form span.left-cap{display: block; float: left;
+width: 18px; height: 37px;
+background: url("/static/a.png") no-repeat top right}
+#search_form #indicator{
+position: absolute; top: 9px; right: 5px}
+
+    </style>
+</head>
+
+<body>
+<h1 align="center">Welcome To Food Search Engine</h1>
+<div id="container">   
+
+		<form id="search_form" method="get" action="/search/">
+		<span class="left-cap"></span>
+		<input type="text" name="food" id="food" maxlength="30"
+		value="keyword" onclick="if(this.value=='keyword')
+		this.value='';" onblur="if(this.value=='keyword'||
+		this.value=='')this.value='keyword';" />
+		</form>
+
+
+	<table class="zebra">
+        <caption>Search Result:</caption>
+		<thead>
+        	<tr>
+				<th>Number</th>
+				<th>Food </th>
+				<th>URL</th>
+				<th>Kind</th>
+            </tr>
+		</thead>
+
+        <tbody>
+             {% for user in list1 %}
+
+              <tr>
+			  <td><p align="center">{{ user.number }}</p></td>
+              <td><p align="center">{{ user.name }} ({{user.ID}})</p></td>
+              <td><p align="center"><a href="/user/?id={{ user.ID }}">Click here for more...</a></p></td>
+              <td><p align="center">{{user.kind}}<p/></td>
+			  </tr>
+
+            {% endfor %}
+        </tbody>
+	</table>
+
+
+<br/>
+
+
+		<br/>
+		<tr>
+
+			<td><p align="center"><a href="/search/?food={{food}}&pag={{prepage}}"><font color="#FFFFFF"><font face="黑体">上一页<font/><font/></a></p></td>
+			<td><p align="center"><a href="/search/?food={{food}}&pag={{nextpage}}"><font color="#FFFFFF"><font face="黑体">下一页<font/><font/></a></p></td>
+			<br/>
+			<td><p align="center"><a href="/search/?food={{food}}&pag=1"><font color="#FFFFFF"><font face="Verdana">To Kind Of Rice<font/><font/></a></p></td>
+			<td><p align="center"><a href="/search/?food={{food}}&pag={{cakepage}}"><font color="#FFFFFF"><font face="Verdana">To Kind Of Cake<font/><font/></a></p></td>
+
+		</tr>
+</div>
+
+	<br/>
+  	<h3 align="center"><a href="/"><font color="#FFFFFF">Return Home<font/></a></h3>
+
+
+
+</body>
+</html>
